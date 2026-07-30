@@ -20,7 +20,7 @@ venue:
   type: "Working Group"
   mail: "lake@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/lake/"
-  github: "LPFraile/authkem"
+  github: "lake-wg/authkem"
   latest: "https://LPFraile.github.io/authkem/draft-ietf-lake-authkem-edhoc.html"
 
 author:
