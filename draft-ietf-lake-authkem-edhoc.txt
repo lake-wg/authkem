@@ -41,7 +41,7 @@ About This Document
    https://www.ietf.org/mailman/listinfo/lake/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/LPFraile/authkem.
+   https://github.com/lake-wg/authkem.
 
 Status of This Memo
 
