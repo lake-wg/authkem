@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-25T00:53:30.611512+00:00",
+  "timestamp": "2026-08-27T06:36:57.527989+00:00",
   "repo": "lake-wg/authkem",
   "labels": [
     {
@@ -49,6 +49,39 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOTf_4GM8AAAABOTogrQ",
+      "title": "Change name to \"KEM-based Authentication for LAKE\"",
+      "url": "https://github.com/lake-wg/authkem/issues/1",
+      "state": "OPEN",
+      "author": "emanjon",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-08-26T08:43:31Z",
+      "updatedAt": "2026-08-26T08:43:31Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOTf_4GM8AAAABOTpVgQ",
+      "title": "Add optional message_6",
+      "url": "https://github.com/lake-wg/authkem/issues/2",
+      "state": "OPEN",
+      "author": "emanjon",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This method needs an optional message_6 similar to message_4 in RFC 9528. Some use cases such as EAP-EDHOC need a protected success indication.\n\nG\u00f6ran suggested that maybe LAKE should specify a general construction for for these type of messages only containing a tag and EAD. You could even allow more than one such message.\n\nhttps://mailarchive.ietf.org/arch/msg/lake/qZShy010mEi6EqNGL2WjXCYi-10/\n",
+      "createdAt": "2026-08-26T08:45:08Z",
+      "updatedAt": "2026-08-26T08:45:08Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
