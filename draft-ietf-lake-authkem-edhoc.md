@@ -1,5 +1,5 @@
 ---
-title: "KEM-based Authentication for EDHOC"
+title: "KEM-based Authentication for LAKE"
 abbrev: "EDHOC-KEM"
 category: std
 
@@ -21,7 +21,7 @@ venue:
   mail: "lake@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/lake/"
   github: "lake-wg/authkem"
-  latest: "https://LPFraile.github.io/authkem/draft-ietf-lake-authkem-edhoc.html"
+  latest: "https://lake-wg.github.io/authkem/#go.draft-ietf-lake-authkem-edhoc.html"
 
 author:
   -
@@ -76,7 +76,7 @@ normative:
   RFC8949:
   RFC8742:
   RFC5116:
-  I-D.spm-lake-pqsuites:
+  I-D.ietf-lake-pqsuites:
 
 informative:
   RFC9794:
