@@ -790,10 +790,6 @@ The KEM-based authentication method does not provide non-repudiation, but only i
 
 {{KEMBinding-CCS24}} demonstrates that IND-CCA2 security alone does not preclude re-encapsulation attacks in KEM-based key exchange protocols. Such attacks can lead to unknown key-share conditions, in which two honest parties derive the same shared secret while associating it with different peer identities. Therefore, any KEM used in this specification MUST achieve IND-CCA2 security and MUST ensure that the derived shared secret is cryptographically bound to the recipients public key. This requirement prevents re-encapsulation and related key-substitution attacks.
 
-## Four-Message Variant {#Four}
-
-The proposed KEM-based authentication method with a 5-message handshake is designed to meet the same security requirements as static-DH method. However, it can be adapted to reduce the number of round trips while remaining suitable for scenarios where neither party knows the other beforehand. This is achieved by transmitting the ID_CRED_I credentials of the Initiator in plain-text within the message_1, similar to the Noise IX pattern, where the Initiator's static key is immediately transmitted to the Responder, despite or absent identity protection. This modification allows the Initiator to authenticate itself in Message 2, eliminating the need for Message 5. Since the Responder includes its credentials in the first message, Message 4 remains necessary to ensure explicit authentication of the Responder. This adaptation reduces the message exchange to four but sacrifices identity protection for the Initiator's credentials.
-
 # IANA Considerations {#IANA}
 
 ## COSE Algorithms Registry {#cose-algorithms-registry}
