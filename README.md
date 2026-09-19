@@ -4,10 +4,10 @@
 
 This is the working area for the IETF [LAKE Working Group](https://datatracker.ietf.org/group/lake/documents/) Internet-Draft, "KEM-based Authentication for EDHOC".
 
-* [Editor's Copy](https://LPFraile.github.io/authkem/#go.draft-ietf-lake-authkem-edhoc.html)
+* [Editor's Copy](https://lake-wg.github.io/authkem/#go.draft-ietf-lake-authkem-edhoc.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-lake-authkem-edhoc)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-lake-authkem-edhoc)
-* [Compare Editor's Copy to Working Group Draft](https://LPFraile.github.io/authkem/#go.draft-ietf-lake-authkem-edhoc.diff)
+* [Compare Editor's Copy to Working Group Draft](https://lake-wg.github.io/authkem/#go.draft-ietf-lake-authkem-edhoc.diff)
 
 
 ## Contributing
