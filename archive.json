@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T02:49:33.499781+00:00",
+  "timestamp": "2026-11-15T04:15:28.879036+00:00",
   "repo": "lake-wg/authkem",
   "labels": [
     {
@@ -78,24 +78,32 @@
       "labels": [],
       "body": "This method needs an optional message_6 similar to message_4 in RFC 9528. Some use cases such as EAP-EDHOC need a protected success indication.\n\nG\u00f6ran suggested that maybe LAKE should specify a general construction for for these type of messages only containing a tag and EAD. You could even allow more than one such message.\n\nhttps://mailarchive.ietf.org/arch/msg/lake/qZShy010mEi6EqNGL2WjXCYi-10/\n",
       "createdAt": "2026-08-26T08:45:08Z",
-      "updatedAt": "2026-08-26T08:45:08Z",
+      "updatedAt": "2026-11-13T13:22:01Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "LPFraile",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "First, I would like to better understand what exactly is meant by a protected success indication in this context. Is the objective to demonstrate possession of the three shared secrets and the final handshake pseudorandom key, PRK_4e3m, or is explicit confirmation of PRK_out required?\n\nIn the original EDHOC method 3, the optional message_4 provides key confirmation from the Responder using K_4, derived from PRK_4e3m, rather than directly using PRK_out. Similarly, the Initiator demonstrates possession of keying material derived from PRK_4e3m through MAC_3, even though message_3 itself is protected using K_3, derived from PRK_3e2m. Therefore, in neither case is PRK_out directly used to provide key confirmation.\n\nIn the current KEM-based method, before sending message_4_KEM, the Responder has already derived the three shared secrets and computed PRK_4e3m, incorporating all three of them. Through message_4_KEM, the Responder provides authentication through MAC_2 and explicit key confirmation through K_4, derived from PRK_4e3m, demonstrating possession of keying material derived from all three shared secrets.\n\nThis makes me wonder whether explicit confirmation of PRK_out is actually necessary, or whether demonstrating possession of the final handshake keying material is sufficient, as in the original EDHOC construction.\n\nOn the other hand, if by protected success indication we mean that the Initiator should receive explicit confirmation that the Responder has successfully received and verified message_5_KEM, including MAC_3, and has therefore successfully authenticated the Initiator and completed the handshake, then I agree that an optional message_6_KEM could be used to provide this additional confirmation.",
+          "createdAt": "2026-11-13T13:22:01Z",
+          "updatedAt": "2026-11-13T13:22:01Z"
+        }
+      ]
     },
     {
       "number": 3,
       "id": "I_kwDOTf_4GM8AAAABSFBtZQ",
       "title": "Remove Section 6.3 Four-Message Variant",
       "url": "https://github.com/lake-wg/authkem/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "emanjon",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "This does definitely not belong in Security Considerations and is not reflecting bad on the LAKE protocol in discussions in CFRG",
       "createdAt": "2026-09-19T06:04:35Z",
-      "updatedAt": "2026-09-19T06:04:35Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-13T12:47:51Z",
+      "closedAt": "2026-11-13T12:47:51Z",
       "comments": []
     },
     {
@@ -110,9 +118,17 @@
       "labels": [],
       "body": "LAKE WG discussed KCI-type attack during the standardization of RFC 9528\nhttps://www.rfc-editor.org/info/rfc9528/#section-9.1\n\n\"Key Compromise Impersonation (KCI): In EDHOC authenticated with signature keys, EDHOC provides KCI protection against an attacker having access to the long-term key or the ephemeral secret key. With static Diffie-Hellman key authentication, KCI protection would be provided against an attacker having access to the long-term Diffie-Hellman key but not to an attacker having access to the ephemeral secret key. Note that the term KCI has typically been used for compromise of long-term keys and that an attacker with access to the ephemeral secret key can only attack that specific EDHOC session.\"\n\nI don't remember if KCI-type attacks were discussed for KEM-based authentication. draft-ietf-lake-authkem-edhoc-00 clearly needs to discuss KCI-type attacks.\n\nhttps://mailarchive.ietf.org/arch/msg/lake/2N-Xy8GzoEFPqxKwtm9RDRMIXcQ/",
       "createdAt": "2026-09-19T06:48:55Z",
-      "updatedAt": "2026-09-19T06:48:55Z",
+      "updatedAt": "2026-11-13T12:58:54Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "LPFraile",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "KCI-type attacks were not studied in the 00 draft version; I have added a paragraph on this point to Section 6 in -01 version. Let me know what your comments are on it.\n\n\"The authentication method defined in this document is intended to retain resistance to classical Key-Compromise Impersonation (KCI) attacks. In particular, compromise of one party's static KEM private key alone should not enable an attacker to impersonate the peer to that party. Fresh KEM encapsulations using the static KEM public keys MUST be generated for each protocol session. ss_I, ss_R, and their corresponding ciphertexts MUST NOT be reused across sessions. Consequently, disclosure of values from one session does not by itself enable impersonation in subsequent sessions. Within a given session, both the authentication keys used to compute and verify MAC_2 and MAC_3 and the subsequently derived session keying material providing implicit authentication are derived through the LAKE key schedule from a combination of ss_eph, ss_I, and ss_R; therefore, disclosure of ss_I or ss_R, alone should not be sufficient to impersonate a peer.\n\nThe KEM-based authentication method also differs from static-DH LAKE with respect to leakage of ephemeral key material. In static-DH authentication, the authentication secret is derived using the local ephemeral private key and the peer's static public key; disclosure of the ephemeral private key therefore allows that secret to be recomputed from otherwise public information. By contrast, in the KEM-based construction, disclosure of the ephemeral KEM secret does not allow the static KEM-derived authentication shared secrets to be recomputed, since each depends only on the corresponding static KEM private key. The authentication and session keying material is subsequently derived through the LAKE key schedule from the combination of ss_eph, ss_I, and ss_R. Consequently, leakage of the ephemeral KEM secret alone is not sufficient to derive the complete authentication keying material or to impersonate the peer.\"\n\n",
+          "createdAt": "2026-11-13T12:58:53Z",
+          "updatedAt": "2026-11-13T12:58:53Z"
+        }
+      ]
     },
     {
       "number": 6,
@@ -143,15 +159,15 @@
       "id": "I_kwDOTf_4GM8AAAABSFnVlg",
       "title": "Refer to draft-ietf-lake-pqsuites for cipher suite registrations",
       "url": "https://github.com/lake-wg/authkem/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "emanjon",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-09-19T08:24:55Z",
-      "updatedAt": "2026-09-19T08:24:55Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-13T12:48:03Z",
+      "closedAt": "2026-11-13T12:48:03Z",
       "comments": []
     }
   ],
